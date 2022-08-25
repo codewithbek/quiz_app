@@ -1,20 +1,12 @@
-class QuestionItem {
-  QuestionItem(
-      {required this.question,
-        required this.variant1,
-        required this.variant2,
-        required this.variant3,
-        required this.variant4,
-        required this.trueAnswer,
-        this.imagePath,
-      }
-      );
+class QuizData {
+  final String questionText, v1, v2, v3, v4, trueAnswer;
 
-  String question;
-  String variant1;
-  String variant2;
-  String variant3;
-  String variant4;
-  String trueAnswer;
-  String? imagePath;
+  QuizData({
+    required this.questionText,
+    required this.v1,
+    required this.v2,
+    required this.v3,
+    required this.v4,
+    required this.trueAnswer,
+  });
 }

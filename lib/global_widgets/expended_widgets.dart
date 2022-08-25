@@ -29,7 +29,7 @@ class ExpandableWidget extends StatelessWidget {
               child: Container(
                 height: 16,
                 decoration: BoxDecoration(
-                    color: MyColors.white,
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                           blurRadius: 4,

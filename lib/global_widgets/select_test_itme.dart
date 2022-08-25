@@ -1,85 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_quiz_app/utils/colors.dart';
-import 'package:my_quiz_app/utils/styles.dart';
+
+
 
 class SelectTestItem extends StatelessWidget {
+  final String subjectName, iconPath;
+  final List<Color> gradientColors;
+  final int direction, questionsCount;
+  final VoidCallback onTap;
+
   const SelectTestItem(
       {Key? key,
-        required this.gradientColors,
-        required this.text,
-        required this.questionCount,
-        required this.iconPath,
-        required this.direction, required this.onTap})
+      required this.subjectName,
+      required this.iconPath,
+      required this.questionsCount,
+      required this.gradientColors,
+      required this.direction,
+      required this.onTap})
       : super(key: key);
-
-  final List<Color> gradientColors;
-  final String text;
-  final int questionCount;
-  final String iconPath;
-  final int direction;
-  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        children: [
-          Container(
-              margin: const EdgeInsets.only(top: 35),
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(colors: gradientColors),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: direction == 1
-                            ? CrossAxisAlignment.start
-                            : CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            text,
-                            style: TextStyle(fontSize: 38.sp, color: MyColors.white, fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                            "Questions Count: $questionCount",
-                            style: TextStyle(fontSize: 20.sp, color: MyColors.white,fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )),
-          direction == 1
-              ? Positioned(
-            right: 0,
-            top: 0,
-            child: Image.asset(
-              iconPath,
-              width: 100,
-              height: 100,
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            margin: EdgeInsets.only(top: 25.h),
+            padding: EdgeInsets.all(22.sp),
+            height: MediaQuery.of(context).size.height * 0.185,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: gradientColors),
+              borderRadius: BorderRadius.circular(16.r),
             ),
-          )
-              : Positioned(
-            left: 0,
-            top: 0,
-            child: Image.asset(
-              iconPath,
-              width: 100,
-              height: 100,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: direction == 1
+                        ? CrossAxisAlignment.start
+                        : CrossAxisAlignment.end,
+                    children: [
+                      Text(subjectName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white, fontSize: 33.sp)),
+                      SizedBox(height: 15.h),
+                      Text(
+                        "Questions Count: $questionsCount",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white, fontSize: 15.sp),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+        direction == 1
+            ? Positioned(right: 0, top: 0, child: Image.asset(iconPath))
+            : Positioned(left: 0, top: 0, child: Image.asset(iconPath)),
+      ],
     );
   }
 }

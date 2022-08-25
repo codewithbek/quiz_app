@@ -1,27 +1,27 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:my_quiz_app/screens/splash_screen.dart';
 
-void main() async {
-  runApp(const QuizApp());
+
+void main() {
+  runApp(const MyQuizApp());
 }
 
-class QuizApp extends StatelessWidget {
-  const QuizApp({Key? key}) : super(key: key);
+class MyQuizApp extends StatelessWidget {
+  const MyQuizApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: child,
+          home: SplashScreen(),
         );
       },
-      child: const SplashScreen(),
     );
   }
 }

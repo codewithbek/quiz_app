@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_quiz_app/global_widgets/my_custom_appbar.dart';
-import 'package:my_quiz_app/global_widgets/my_custom_button.dart';
-import 'package:my_quiz_app/screens/sms_code_screen.dart';
-import 'package:my_quiz_app/utils/icons.dart';
-import 'package:my_quiz_app/utils/utility_functions.dart';
-import '../utils/colors.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_quiz_app/global_widgets/my_custom_button.dart';
+import 'package:my_quiz_app/global_widgets/my_custom_input.dart';
+import '../utils/icons.dart';
+import '../utils/utility_functions.dart';
+import 'sms_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,88 +16,68 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController textController = TextEditingController();
-  late final FocusNode focusNode;
-
-  @override
-  void initState() {
-    focusNode = FocusNode();
-    super.initState();
-  }
+  final TextEditingController textEditingController = TextEditingController();
+  final FocusNode focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: const MyCustomAppBar(
-          title: "Login",
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.dark,
+          ),
+          title: Text(
+            "Login",
+            style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 24.sp),
+          ),
+          centerTitle: true,
+          elevation: 0,
         ),
-        backgroundColor: MyColors.white,
         body: Column(
           children: [
-            Center(child: Lottie.asset(MyIcons.login_lottie)),
-            SizedBox(
-              height: 30.h,
-            ),
+            Lottie.asset(MyIcons.loginLottie),
+            SizedBox(height: 30.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: TextFormField(
-                keyboardType: TextInputType.phone,
-                controller: textController,
+              child: MyCustomInput(
+                codeLength: 13,
+                textEditingController: textEditingController,
                 focusNode: focusNode,
-                onChanged: (value) {
-                  print(value);
-                  if (value == "+998903814573") {
-                    UtilityFunctions.getMyToast(message: "Enter SMS code");
-                  }
-                },
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                    hintText: "Enter your mobile number",
-                    hintStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15.sp,
-                        color: MyColors.black.withOpacity(0.3)),
-                    border: const OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: MyColors.C_E5E5E5, width: 2))),
+                hintText: "Enter your mobile phone",
+                keyType: TextInputType.phone,
               ),
             ),
-            SizedBox(
-              height: 50.h,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
-              child: MyCustomButton(
-                text: "Login",
+            SizedBox(height: 50.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
+              child: MyButton(
+                buttonText: "Login",
                 onTap: () {
-                  if (textController.text == "+998903814573") {
+                  if (textEditingController.text == "+998991234567") {
+                    UtilityFunctions.getMyToast(message: "Enter SMS code!");
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return const SMSCodeScreen();
+                      return const SmsCodeScreen();
                     }));
                   } else {
-                    UtilityFunctions.getMyToast(message: "Invalid number!");
+                    UtilityFunctions.getMyToast(message: "Invalid number");
                   }
                 },
-                buttonText: 'Login',
               ),
             ),
-            const Expanded(child: const SizedBox()),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50.w),
-              child: Text(
-                "term's and conditons apply POWERED BY - sparrowdevops.com",
-                textAlign: TextAlign.center,
+            const Expanded(child: SizedBox()),
+            Text("terms and conditions apply",
+                style: TextStyle(color: Colors.grey.shade400, fontWeight: FontWeight.w500)),
+            SizedBox(height: 7.h),
+            Text("POWERED BY - sparrowdevops.com",
                 style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16.sp,
-                    color: MyColors.black.withOpacity(0.5)),
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            )
+                    color: Colors.grey.shade400, fontWeight: FontWeight.w500)),
+            SizedBox(height: 7.h),
           ],
         ));
   }

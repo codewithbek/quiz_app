@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:my_quiz_app/utils/colors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:my_quiz_app/utils/icons.dart';
-import 'package:my_quiz_app/utils/styles.dart';
 
 class VariantItem extends StatelessWidget {
-  const VariantItem(
-      {Key? key,
-        required this.variantText,
-        required this.isSelected,
-        required this.onTap})
-      : super(key: key);
+  const VariantItem({
+    Key? key,
+    required this.variantText,
+    required this.isSelected,
+    required this.onTap,
+  }) : super(key: key);
 
   final String variantText;
   final bool isSelected;
@@ -21,43 +20,27 @@ class VariantItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 12,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: MyColors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 7,
-              spreadRadius: 5,
-              color: Colors.grey.shade300,
-              offset: const Offset(1, 3),
-            ),
-          ],
-          borderRadius: BorderRadius.circular(
-            16,
-          ),
-        ),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 7,
+                spreadRadius: 2,
+                color: Colors.grey.shade300,
+                offset: const Offset(1, 4),
+              )
+            ],
+            borderRadius: BorderRadius.circular(12.r)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Text(
-                variantText,
-                style: MyTextStyle.interMedium500.copyWith(
-                  fontSize: 16,
-                  color: MyColors.black,
-                ),
-                maxLines: 10,
-              ),
-            ),
+                child: Text(variantText,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500, fontSize: 17.sp))),
             isSelected
-                ? SvgPicture.asset(
-              MyIcons.tick,
-              width: 30,
-              height: 30,
-            )
+                ? SvgPicture.asset(MyIcons.tick, width: 27.h, height: 27.h)
                 : const SizedBox()
           ],
         ),

@@ -17,13 +17,13 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSize {
         style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.w500,
-            color: MyColors.black),
+            color: Colors.black),
       ),
       centerTitle: true,
       elevation: 0,
-      backgroundColor: MyColors.white,
+      backgroundColor: Colors.white,
       systemOverlayStyle:
-      const SystemUiOverlayStyle(statusBarColor: MyColors.white),
+      const SystemUiOverlayStyle(statusBarColor: Colors.white),
     );
   }
 
